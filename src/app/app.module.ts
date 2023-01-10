@@ -18,6 +18,11 @@ import {MatInputModule} from '@angular/material/input';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import { MatCardModule } from '@angular/material/card';
 import {MatButtonModule} from '@angular/material/button';
+import { UserCardComponent } from './components/user-card/user-card.component';
+import { PostCardComponent } from './components/post-card/post-card.component';
+import { PostPageComponent } from './components/post-page/post-page.component';
+import { CommentCardComponent } from './components/comment-card/comment-card.component';
+import { NewMessageComponent } from './components/new-message/new-message.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +32,12 @@ import {MatButtonModule} from '@angular/material/button';
     AppuserPageComponent,
     SignupComponent,
     LoginComponent,
-    UsersListComponent
+    UsersListComponent,
+    UserCardComponent,
+    PostCardComponent,
+    PostPageComponent,
+    CommentCardComponent,
+    NewMessageComponent
   ],
   imports: [
     BrowserModule,

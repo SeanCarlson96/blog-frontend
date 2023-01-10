@@ -1,1 +1,20 @@
-<p>posts works!</p>
+<mat-form-field style="margin: 10px;">
+    <mat-label>Filter</mat-label>
+    <input
+      matInput
+      type="text"
+      placeholder="Filter"
+      [(ngModel)]="filter"
+    />
+</mat-form-field>
+
+<button *ngIf="ui.loggedIn===true" type="submit" color="accent"
+(click)="ui.currentPage='new-message'" mat-icon-button>
+    <mat-icon>add_box</mat-icon>Add Blog Post
+</button>
+
+<div *ngFor="let post of ui.messages">
+    <div *ngIf="post.body.toLowerCase().includes(filter.toLowerCase())">
+        <app-post-card [post]="post"></app-post-card>
+    </div>
+</div>

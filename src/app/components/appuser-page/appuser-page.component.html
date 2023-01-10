@@ -1,1 +1,18 @@
-<p>appuser-page works!</p>
+<header>
+    <h1>{{ui.userForUserPage.username}}</h1>
+    <p>{{ui.userForUserPage.password}}</p>
+  </header>
+  
+  <section>
+    <h2>Send {{ui.userForUserPage.username}} a Message</h2>
+    <button >Message</button>
+  </section>
+  
+  <section>
+    <h2>Posts by {{ui.userForUserPage.username}}</h2>
+    <div *ngFor="let post of ui.messages">
+        <div *ngIf="post.author===ui.userForUserPage">
+            <app-post-card [post]="post"></app-post-card>
+        </div>
+    </div>
+  </section>

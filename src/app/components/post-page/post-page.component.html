@@ -1,0 +1,17 @@
+<header>
+    <h1>{{ui.postForPostPage.title}}</h1>
+    <p>{{ui.postForPostPage.author.username}}</p>
+  </header>
+  
+  <section>
+    <p>{{ui.postForPostPage.body}}</p>
+  </section>
+  
+  <section>
+    <h2>Comments</h2>
+    <div *ngFor="let comment of ui.messages">
+        <div *ngIf="comment.post===ui.postForPostPage">
+            <app-comment-card [comment]="comment"></app-comment-card>
+        </div>
+    </div>
+  </section>

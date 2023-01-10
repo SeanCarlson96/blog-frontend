@@ -2,13 +2,12 @@ import { Component } from '@angular/core';
 import { UiService } from 'src/app/services/ui.service';
 
 @Component({
-  selector: 'app-posts',
-  templateUrl: './posts.component.html',
-  styleUrls: ['./posts.component.css']
+  selector: 'app-post-page',
+  templateUrl: './post-page.component.html',
+  styleUrls: ['./post-page.component.css']
 })
-export class PostsComponent {
+export class PostPageComponent {
   public ui: UiService
-  public filter: string = ''
 
   constructor(ui: UiService){
     this.ui = ui

@@ -1,0 +1,18 @@
+<h3 *ngIf="ui.messageType==='post'" style="margin-left: 5vw;">New Blog Post</h3><br/>
+<div class="container">
+        <mat-form-field appearance="fill" *ngIf="ui.messageType==='post'">
+            <mat-label>Title</mat-label>
+            <input name="newMessageTitle" matInput
+            [(ngModel)]="newMessageTitle" required />
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+            <mat-label>Body</mat-label>
+            <textarea name="newMessageBody" matInput
+            [(ngModel)]="newMessageBody" required></textarea>
+        </mat-form-field>
+
+        <button mat-icon-button type="submit" color="accent" (click)="createMessage()">
+            <mat-icon>add_box</mat-icon>
+            Publish
+        </button>
+</div>

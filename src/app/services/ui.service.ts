@@ -3,6 +3,8 @@ import { AppUser } from 'src/data/AppUser';
 import { HttpClient } from '@angular/common/http';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Observable, Subject, take } from 'rxjs';
+import { Message } from 'src/data/Message';
+import { MessageDTO } from 'src/DTOs/MessageDTO';
 
 @Injectable({
   providedIn: 'root'
@@ -13,11 +15,17 @@ export class UiService {
   public currentUser = {} as AppUser | null
   private newUser = {} as AppUser
   public appUsers: AppUser[] = [];
-  appUsersSubject: Subject<AppUser[]> = new Subject();
+  public messages: Message[] = [];
+  public appUsersSubject: Subject<AppUser[]> = new Subject();
+  public messagesSubject: Subject<Message[]> = new Subject();
+  public userForUserPage = {} as AppUser
+  public postForPostPage = {} as Message
+  public messageType: string = ''
 
   constructor(private http: HttpClient, private _snackBar: MatSnackBar) {
     this.currentPage = localStorage.getItem("page") ? localStorage.getItem("page") : 'posts';
     this.loadUsers();
+    this.loadMessages();
   }
   openSnackBar(message: string, action: string){
     this._snackBar.open(message, action);
@@ -67,5 +75,32 @@ export class UiService {
   }
   whenAppUsersUpdates(): Observable<AppUser[]>{
     return this.appUsersSubject.asObservable();
+  }
+  public loadMessages(): void{
+    this.http
+      .get<Message[]>('http://localhost:8080/messages')
+      .pipe(take(1))
+      .subscribe({
+          next: messages =>{
+            this.messages = messages;
+            this.messagesSubject.next(messages);
+          },
+          error: () => this.openSnackBar('Error loading all messages', 'Close'),
+    })
+  }
+  addMessage(newMessage: MessageDTO): void {
+    this.http
+      .post<AppUser>('http://localhost:8080/messages', newMessage)
+      .pipe(take(1))
+      .subscribe({
+        next: () => {
+          this.openSnackBar('New Message Posted', 'Close')
+          this.loadMessages();
+        },
+        error: () => this.openSnackBar('Message failed to post', 'Close'),
+    })
+  }
+  whenMessagesUpdates(): Observable<Message[]>{
+    return this.messagesSubject.asObservable();
   }
 }
