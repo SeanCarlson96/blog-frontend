@@ -1,14 +1,14 @@
 <mat-toolbar class="toolbar" color="primary">  
-        <span (click)="ui.currentPage='posts'">Posts</span>
-        <span (click)="ui.currentPage='users-list'">Users</span>
+        <span (click)="ui.setPage('posts')">Posts</span>
+        <span (click)="ui.setPage('users-list')">Users</span>
 
     <div *ngIf="!ui.loggedIn" class="toolbar">
-        <span (click)="ui.currentPage='login'">Login</span>
-        <span (click)="ui.currentPage='signup'">Sign Up</span>
+        <span (click)="ui.setPage('login')">Login</span>
+        <span (click)="ui.setPage('signup')">Sign Up</span>
     </div>
 
     <div *ngIf="ui.loggedIn">
-        <span (click)="ui.currentUser=null; ui.loggedIn=false">Logout</span>
+        <span (click)="ui.logout()">Logout</span>
     </div>
 
 </mat-toolbar>

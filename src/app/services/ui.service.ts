@@ -24,8 +24,32 @@ export class UiService {
 
   constructor(private http: HttpClient, private _snackBar: MatSnackBar) {
     this.currentPage = localStorage.getItem("page") ? localStorage.getItem("page") : 'posts';
+    this.currentUser = localStorage.getItem("currentUser") ? JSON.parse(localStorage.getItem("currentUser") || '{}') : {} as AppUser;
+    this.loggedIn = localStorage.getItem("loggedIn") === 'true' ? true : false;
+    this.userForUserPage = localStorage.getItem("userForUserPage") ? JSON.parse(localStorage.getItem("userForUserPage") || '{}') : {} as AppUser;
+    this.postForPostPage = localStorage.getItem("postForPostPage") ? JSON.parse(localStorage.getItem("postForPostPage") || '{}') : {} as Message;
     this.loadUsers();
     this.loadMessages();
+  }
+  setPage(target: string): string{
+    localStorage.setItem("page", target);
+    return this.currentPage = target
+  }
+  setCurrentUser(user: AppUser): AppUser{
+    localStorage.setItem("currentUser", JSON.stringify(user));
+    localStorage.setItem("loggedIn", 'true');
+    return this.currentUser = user
+  }
+  setUserForUserPage(user: AppUser): AppUser{
+    localStorage.setItem("userForUserPage", JSON.stringify(user));
+    return this.userForUserPage = user
+  }
+  setPostForPostPage(post: Message): Message{
+    localStorage.setItem("postForPostPage", JSON.stringify(post));
+    return this.postForPostPage = post
+  }
+  logout(){
+    this.currentUser=null; this.loggedIn=false; localStorage.setItem("loggedIn", 'false');
   }
   openSnackBar(message: string, action: string){
     this._snackBar.open(message, action);
@@ -42,15 +66,15 @@ export class UiService {
           error: () => this.openSnackBar('Error loading all users', 'Close'),
     })
   }
-  getAppUser(liEmail: string, liPassword: string): void {
+  getAppUser(liUsername: string, liPassword: string): void {
     this.http
-      .get<AppUser>(`http://localhost:8080/appusers?email=${liEmail}&password=${liPassword}`)
+      .get<AppUser>(`http://localhost:8080/appusers?username=${liUsername}&password=${liPassword}`)
       .pipe(take(1))
       .subscribe({
         next: appUser => {
         this.currentUser = appUser
+        this.setCurrentUser(appUser)
         this.loggedIn = true
-        console.log(this.currentUser)
       },
       error: () => this.openSnackBar('Invalid Credentials', 'Close'),
     })
@@ -84,11 +108,13 @@ export class UiService {
           next: messages =>{
             this.messages = messages;
             this.messagesSubject.next(messages);
+            console.log(messages)
           },
           error: () => this.openSnackBar('Error loading all messages', 'Close'),
     })
   }
   addMessage(newMessage: MessageDTO): void {
+    console.log(newMessage)
     this.http
       .post<AppUser>('http://localhost:8080/messages', newMessage)
       .pipe(take(1))

@@ -11,7 +11,7 @@
   <section>
     <h2>Posts by {{ui.userForUserPage.username}}</h2>
     <div *ngFor="let post of ui.messages">
-        <div *ngIf="post.author===ui.userForUserPage">
+        <div *ngIf="post.author.id===ui.userForUserPage.id && post.title">
             <app-post-card [post]="post"></app-post-card>
         </div>
     </div>

@@ -12,7 +12,6 @@ export class NewMessageComponent {
   public newMessageTitle: string = ''
   public newMessageBody: string = ''
   public newMessage = {} as MessageDTO
-  public newCommentPostId: number = 0
   public newMessageRecipientId: number = 0
 
   constructor(ui: UiService){
@@ -37,7 +36,7 @@ export class NewMessageComponent {
         authorId: this.ui.currentUser?.id,
         created_date: new Date,
         updated_date: new Date,
-        postId: this.newCommentPostId
+        postId: this.ui.postForPostPage.id
       }
     } else if(this.ui.messageType==='message'){
       this.newMessage = {

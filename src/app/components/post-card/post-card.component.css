@@ -1,0 +1,9 @@
+.card {
+    background-color: azure;
+    border: solid black 1px;
+    margin: 10px;
+    width: 200px;
+}
+.card:hover {
+    cursor: pointer;
+}

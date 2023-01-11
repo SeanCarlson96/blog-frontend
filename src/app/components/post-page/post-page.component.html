@@ -8,9 +8,13 @@
   </section>
   
   <section>
+    <button *ngIf="ui.loggedIn===true" color="accent"
+      (click)="ui.setPage('new-message'); ui.messageType='comment';" mat-flat-button>
+        New Comment
+    </button>
     <h2>Comments</h2>
     <div *ngFor="let comment of ui.messages">
-        <div *ngIf="comment.post===ui.postForPostPage">
+        <div *ngIf="comment.post?.id===ui.postForPostPage.id">
             <app-comment-card [comment]="comment"></app-comment-card>
         </div>
     </div>

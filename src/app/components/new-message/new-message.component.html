@@ -10,9 +10,10 @@
             <textarea name="newMessageBody" matInput
             [(ngModel)]="newMessageBody" required></textarea>
         </mat-form-field>
-
-        <button mat-icon-button type="submit" color="accent" (click)="createMessage()">
-            <mat-icon>add_box</mat-icon>
+    <div>
+        <button mat-flat-button type="submit" color="accent"
+        (click)="createMessage(); ui.setPage('posts');">
             Publish
         </button>
+    </div>
 </div>

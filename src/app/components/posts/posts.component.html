@@ -8,13 +8,13 @@
     />
 </mat-form-field>
 
-<button *ngIf="ui.loggedIn===true" type="submit" color="accent"
-(click)="ui.currentPage='new-message'" mat-icon-button>
-    <mat-icon>add_box</mat-icon>Add Blog Post
+<button *ngIf="ui.loggedIn===true" color="accent"
+(click)="ui.setPage('new-message'); ui.messageType='post';" mat-flat-button>
+    New Post
 </button>
 
 <div *ngFor="let post of ui.messages">
-    <div *ngIf="post.body.toLowerCase().includes(filter.toLowerCase())">
+    <div *ngIf="post.body.toLowerCase().includes(filter.toLowerCase()) && post.title">
         <app-post-card [post]="post"></app-post-card>
     </div>
 </div>
