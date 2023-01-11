@@ -10,7 +10,7 @@ import { Message } from 'src/data/Message';
 export class CommentCardComponent {
   @Input() comment: Message = { body: '', author: {id: 0, username: '', password: '', messages: []}, created_date: new Date, updated_date: new Date }
   public ui: UiService
-
+  
   constructor(ui: UiService){
     this.ui = ui
   }

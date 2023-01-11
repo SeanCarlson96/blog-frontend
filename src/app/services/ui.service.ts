@@ -108,13 +108,11 @@ export class UiService {
           next: messages =>{
             this.messages = messages;
             this.messagesSubject.next(messages);
-            console.log(messages)
           },
           error: () => this.openSnackBar('Error loading all messages', 'Close'),
     })
   }
   addMessage(newMessage: MessageDTO): void {
-    console.log(newMessage)
     this.http
       .post<AppUser>('http://localhost:8080/messages', newMessage)
       .pipe(take(1))

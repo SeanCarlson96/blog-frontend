@@ -1,15 +1,16 @@
-<header>
+  <header>
     <h1>{{ui.userForUserPage.username}}</h1>
-    <p>{{ui.userForUserPage.password}}</p>
   </header>
   
   <section>
-    <h2>Send {{ui.userForUserPage.username}} a Message</h2>
-    <button >Message</button>
+    <button *ngIf="ui.loggedIn===true" color="accent"
+      (click)="ui.setPage('new-message'); ui.messageType='message';" mat-flat-button>
+        Message
+    </button> 
   </section>
   
   <section>
-    <h2>Posts by {{ui.userForUserPage.username}}</h2>
+    <h3>Posts by {{ui.userForUserPage.username}}</h3>
     <div *ngFor="let post of ui.messages">
         <div *ngIf="post.author.id===ui.userForUserPage.id && post.title">
             <app-post-card [post]="post"></app-post-card>

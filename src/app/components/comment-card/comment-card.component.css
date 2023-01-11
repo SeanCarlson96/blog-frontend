@@ -1,0 +1,11 @@
+.card {
+    background-color: azure;
+    border: solid black 1px;
+    margin: 10px;
+    width: 300px;
+    display: flex-column;
+    gap: 1rem;
+}
+.card:hover {
+    cursor: pointer;
+}

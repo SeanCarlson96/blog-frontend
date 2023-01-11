@@ -10,10 +10,22 @@
             <textarea name="newMessageBody" matInput
             [(ngModel)]="newMessageBody" required></textarea>
         </mat-form-field>
-    <div>
+    <div *ngIf="ui.messageType==='post'">
         <button mat-flat-button type="submit" color="accent"
         (click)="createMessage(); ui.setPage('posts');">
             Publish
+        </button>
+    </div>
+    <div *ngIf="ui.messageType==='comment'">
+        <button mat-flat-button type="submit" color="accent"
+        (click)="createMessage(); ui.setPage('post-page');">
+            Comment
+        </button>
+    </div>
+    <div *ngIf="ui.messageType==='message'">
+        <button mat-flat-button type="submit" color="accent"
+        (click)="createMessage(); ui.setPage('appuser-page');">
+            Send
         </button>
     </div>
 </div>

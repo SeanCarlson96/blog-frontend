@@ -1,9 +1,9 @@
 <header>
     <h1>{{ui.postForPostPage.title}}</h1>
-    <p>{{ui.postForPostPage.author.username}}</p>
+    <p>by: {{ui.postForPostPage.author.username}}</p>
   </header>
   
-  <section>
+  <section class="body">
     <p>{{ui.postForPostPage.body}}</p>
   </section>
   
@@ -12,7 +12,7 @@
       (click)="ui.setPage('new-message'); ui.messageType='comment';" mat-flat-button>
         New Comment
     </button>
-    <h2>Comments</h2>
+    <h3>Comments</h3>
     <div *ngFor="let comment of ui.messages">
         <div *ngIf="comment.post?.id===ui.postForPostPage.id">
             <app-comment-card [comment]="comment"></app-comment-card>
