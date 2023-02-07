@@ -15,8 +15,9 @@ export class UiService {
   public currentUser = {} as AppUser | null
   private newUser = {} as AppUser
   public appUsers: AppUser[] = [];
-  public messages: Message[] = [];
   public appUsersSubject: Subject<AppUser[]> = new Subject();
+  
+  public messages: Message[] = [];
   public messagesSubject: Subject<Message[]> = new Subject();
   public userForUserPage = {} as AppUser
   public postForPostPage = {} as Message
